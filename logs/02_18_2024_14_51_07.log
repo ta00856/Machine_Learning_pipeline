@@ -1,0 +1,39 @@
+[ 2024-02-18 14:51:07,384 ] 96 werkzeug - INFO - [31m[1mWARNING: This is a development server. Do not use it in a production deployment. Use a production WSGI server instead.[0m
+ * Running on all addresses (0.0.0.0)
+ * Running on http://127.0.0.1:5001
+ * Running on http://192.168.1.250:5001
+[ 2024-02-18 14:51:07,384 ] 96 werkzeug - INFO - [33mPress CTRL+C to quit[0m
+[ 2024-02-18 14:51:17,720 ] 96 werkzeug - INFO - 127.0.0.1 - - [18/Feb/2024 14:51:17] "GET / HTTP/1.1" 200 -
+[ 2024-02-18 14:51:22,713 ] 96 werkzeug - INFO - 127.0.0.1 - - [18/Feb/2024 14:51:22] "GET /predictdata HTTP/1.1" 200 -
+[ 2024-02-18 14:51:37,029 ] 828 app - ERROR - Exception on /predictdata [POST]
+Traceback (most recent call last):
+  File "/Users/taukeerahmad/Desktop/MLOPS_NEW/machine_learning/src/utils.py", line 58, in load_object
+    with open(file_path, "rb") as file_obj:
+FileNotFoundError: [Errno 2] No such file or directory: 'artifacts/preprocessor.pkl'
+
+During handling of the above exception, another exception occurred:
+
+Traceback (most recent call last):
+  File "/Users/taukeerahmad/Desktop/MLOPS_NEW/machine_learning/src/pipeline/predict_pipeline.py", line 17, in predict
+    preprocessor=load_object(file_path=preprocessor_path)
+  File "/Users/taukeerahmad/Desktop/MLOPS_NEW/machine_learning/src/utils.py", line 62, in load_object
+    raise CustomException(e, sys)
+src.exception.CustomException: Error occured in python script name [/Users/taukeerahmad/Desktop/MLOPS_NEW/machine_learning/src/utils.py] line number [58] error message[[Errno 2] No such file or directory: 'artifacts/preprocessor.pkl']
+
+During handling of the above exception, another exception occurred:
+
+Traceback (most recent call last):
+  File "/Users/taukeerahmad/opt/anaconda3/envs/ml_ete/lib/python3.9/site-packages/flask/app.py", line 1463, in wsgi_app
+    response = self.full_dispatch_request()
+  File "/Users/taukeerahmad/opt/anaconda3/envs/ml_ete/lib/python3.9/site-packages/flask/app.py", line 872, in full_dispatch_request
+    rv = self.handle_user_exception(e)
+  File "/Users/taukeerahmad/opt/anaconda3/envs/ml_ete/lib/python3.9/site-packages/flask/app.py", line 870, in full_dispatch_request
+    rv = self.dispatch_request()
+  File "/Users/taukeerahmad/opt/anaconda3/envs/ml_ete/lib/python3.9/site-packages/flask/app.py", line 855, in dispatch_request
+    return self.ensure_sync(self.view_functions[rule.endpoint])(**view_args)  # type: ignore[no-any-return]
+  File "/Users/taukeerahmad/Desktop/MLOPS_NEW/machine_learning/app.py", line 39, in predict_datapoint
+    results=predict_pipeline.predict(pred_df)
+  File "/Users/taukeerahmad/Desktop/MLOPS_NEW/machine_learning/src/pipeline/predict_pipeline.py", line 24, in predict
+    raise CustomException(e,sys)
+src.exception.CustomException: Error occured in python script name [/Users/taukeerahmad/Desktop/MLOPS_NEW/machine_learning/src/pipeline/predict_pipeline.py] line number [17] error message[Error occured in python script name [/Users/taukeerahmad/Desktop/MLOPS_NEW/machine_learning/src/utils.py] line number [58] error message[[Errno 2] No such file or directory: 'artifacts/preprocessor.pkl']]
+[ 2024-02-18 14:51:37,031 ] 96 werkzeug - INFO - 127.0.0.1 - - [18/Feb/2024 14:51:37] "[35m[1mPOST /predictdata HTTP/1.1[0m" 500 -
